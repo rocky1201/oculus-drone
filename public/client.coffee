@@ -195,7 +195,7 @@ $ ->
   dronestream = new NodecopterStream(document.getElementById("oculus-stream"))
   $videoBuffer = $('#oculus-stream canvas')
   videoBuffer = $videoBuffer[0]
-  # videoCtx = video.getContext '2d' # not working as it's experimental-webgl
+
   $video1 = $videoBuffer.clone().appendTo('#oculus-left').attr('id', 'oculus-stream-left')
   $video2 = $videoBuffer.clone().appendTo('#oculus-right').attr('id', 'oculus-stream-right')
   video1 = $video1[0]
