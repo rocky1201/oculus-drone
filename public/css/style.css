@@ -1,5 +1,5 @@
 body {
-  background: url(/low_contrast_linen_@2X.png);
+  background: url(../img/low_contrast_linen_@2X.png);
   background-size: 256px;
 }
 
@@ -8,7 +8,7 @@ body {
 }
 
 #drones > .drone {
-  background: url(/furley_bg_@2X.png);
+  background: url(../img/furley_bg_@2X.png);
   background-size: 600px;
   border: 1px solid #333;
   width: 340px;
@@ -33,7 +33,7 @@ body {
 }
 
 .drone > .camera {
-  background: url(/standby.png) center center no-repeat;
+  background: url(../img/standby.png) center center no-repeat;
   clear: both;
   margin: 0 10px;
 
@@ -133,4 +133,9 @@ body {
 
 #oculus-control-right {
   left: 200px;
+}
+
+#button{
+  position: absolute;
+  z-index: 1;
 }
