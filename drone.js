@@ -24,7 +24,7 @@ setInterval(function() {
   control.flush();
 }, 30);
 
-client.config('control:altitude_max', 500)
+client.config('control:altitude_max', 5000)
 client.config('control:control_vz_max', 1000)
 client.config('control:control_yaw', 3.0)
 client.config('control:euler_angle_max', 0.30)
@@ -69,29 +69,30 @@ controller.on('connected', function(data) {
 });
 controller.on('square:press', function (data) {
   //...doStuff();
-  moveDrone(data);
+  // moveDrone(data);
 });
 controller.on('square:release', function (data) {
   //...doStuff();
-  moveDrone(data);
+  // moveDrone(data);
 });
 
 controller.on('triangle:press', function (data) {
   //...doStuff();
-  moveDrone(data);
+  // moveDrone(data);
 });
 controller.on('triangle:release', function (data) {
   //...doStuff();
-  moveDrone(data);
+  // moveDrone(data);
 });
 
 controller.on('circle:press', function (data) {
   //...doStuff();
-  moveDrone(data);
+  // moveDrone(data);
 });
 controller.on('circle:release', function (data) {
   //...doStuff();
-  moveDrone(data);
+  client.disableEmergency();
+
 });
 
 controller.on('x:press', function (data) {
@@ -120,12 +121,12 @@ controller.on('x:release', function (data) {
 controller.on('r2:analog', function (data) {
   //...doStuff();
     console.log("clockwise:", (data / 255));
-    client.clockwise(data/255);
+    client.clockwise(data/255*speed);
 });
 controller.on('l2:analog', function (data) {
   //...doStuff();
   console.log("cclockwise:", (data / 255));
-    client.counterClockwise(data/255);
+    client.counterClockwise(data/255*speed);
   
 });
 
@@ -169,93 +170,12 @@ function liftDrone(data){
         return -1;
     }
     if (data.y<=128){
-        console.log("front:", (128 - data.y)/angle*speed);
-        client.up((128 - data.y) / angle * speed);
+        console.log("front:", (128 - data.y)/angle);
+        client.up((128 - data.y) / angle);
     }
         
     else if (data.y>=128){
-        console.log("back:", (data.y - 128) / angle * speed);
-        client.down((data.y - 128) / angle * speed);
+        console.log("back:", (data.y - 128) / angle);
+        client.down((data.y - 128) / angle);
     }
 }
-// setInterval(function() {
-//     on("x", ((rdata[5] & 32) !== 0));
-//     on("o", ((rdata[5] & 64) !== 0));
-//     on("square", ((rdata[5] & 16) !== 0));
-//     on("triangle", ((rdata[5] & 128) !== 0));
-//     on("left", {x: rdata[1], y: rdata[2]});
-//     on("right", {x: rdata[3], y: rdata[4]});
-// }, 40);
-
-// function on(type, value) {
-//     if (type == "x" && value) {
-//         if (!flying) {
-//             console.log("takeoff");
-//             flying = true;
-//             client.takeoff(function() {
-//                 hovering = true;
-//                 console.log("flying");
-//             });
-//         }
-//     }
-
-//     if (type == "o" && value) {
-//         if (flying) {
-//             console.log("land");
-//             flying   = false;
-//             hovering = false;
-//             client.land(function() {
-//                 console.log("landed");
-//                 client.stop();
-//             });
-//         }
-//     }
-
-//     if (type == "triangle" && value) {
-//         if (flying) {
-//             console.log("flipAhead");
-//             client.animate('flipAhead', 500);
-//         }
-//     }
-
-//     if (type == "square" && value) {
-//         if (flying) {
-//             console.log("flipBehind");
-//             client.animate('flipAhead', 500);
-//         }
-//     }
-
-//     if (hovering) {
-//         if (type == "left" && value.y <= 128) {
-//             console.log("front:", (128 - value.y) / angle * speed);
-//             client.front((128 - value.y) / angle * speed);
-//         } else if (type == "left" && value.y > 128) {
-//             console.log("back:", (value.y - 128) / angle * speed);
-//             client.back((value.y - 128) / angle * speed);
-//         }
-
-//         if (type == "left" && value.x <= 128) {
-//             console.log("left:", (128 - value.x) / angle * speed);
-//             client.left((128 - value.x) / angle * speed);
-//         } else if (type == "left" && value.x > 128) {
-//             console.log("right:", (value.x - 128) / angle * speed);
-//             client.right((value.x - 128) / angle * speed);
-//         }
-
-//         if (type == "right" && value.x <= 128) {
-//             console.log("counterclockwise:", (128 - value.x) / angle * speed);
-//             client.counterClockwise((128 - value.x) / angle * speed);
-//         } else if (type == "right" && value.x > 128) {
-//             console.log("clockwise:", (value.x - 128) / angle * speed);
-//             client.clockwise((value.x - 128) / angle * speed);
-//         }
-
-//         if (type == "right" && value.y <= 128) {
-//             console.log("up:", (128 - value.y) / angle * speed * 0.2);
-//             client.up((128 - value.y) / angle * speed);
-//         } else if (type == "right" && value.y > 128) {
-//             console.log("down:", (value.y - 128) / angle * speed * 0.2);
-//             client.down((value.y - 128) / angle * speed);
-//         }
-//     }
-// }
