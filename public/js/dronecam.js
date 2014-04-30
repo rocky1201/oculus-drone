@@ -17,11 +17,27 @@ function bridgeDisconnected(){
 
 function bridgeConfigUpdated(config){
   console.log("Oculus config updated.");
-  // riftCam.setHMD(config);      
+  riftCam.setHMD(config);      
 }
 
 function bridgeOrientationUpdated(quatValues) {
+  var stats = document.getElementById("stats");
+  
+  stats.innerHTML = "Display Configuration<hr>";
 
+  // Show all the parameters in the config object.
+  for(var itm in config){
+    var row = document.createElement("div");
+    var label = document.createElement("label");
+    var value = document.createElement("span");
+
+    label.innerHTML = itm;
+    value.innerHTML = config[itm];
+    
+    row.appendChild(label);
+    row.appendChild(value);
+    stats.appendChild(row);
+  }
 }
 
 function onKeyDown(event){

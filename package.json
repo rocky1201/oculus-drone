@@ -6,8 +6,9 @@
     "express": "~4.x.x",
     "ar-drone": "~0.3.x",
     "faye": "~0.8.9",
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "dronestream": "~1.1.1" 
   },
-  "repository": "https://github.com/daraosn/oculus-drone.git",
-  "homepage": "https://github.com/daraosn/oculus-drone"
+  "repository": "https://github.com/rocky1201/oculus-drone.git",
+  "homepage": "https://github.com/rocky1201/oculus-drone"
 }
